@@ -1,0 +1,182 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html,body,#app {
+  height: 100%;
+  width: 100%;
+  background: #000;
+  font-family: Consolas, "Courier New", monospace;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#app { position: relative; overflow: hidden; }
+
+.moon-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+.moon-bg img {
+  width: 60vmin;
+  max-width: 700px;
+  opacity: 0.4;
+  filter: drop-shadow(0 0 40px rgba(255, 255, 255, 0.3)) drop-shadow(0 0 30px rgba(0,255,0,0.06)) blur(0.2px);
+  /* filter: drop-shadow(0 0 30px rgba(0,255,0,0.06)) blur(0.2px); */
+  /* filter: 0 0 18px #F2F0EF, 0 0 40px #F2F0EF; */
+  transform: translateZ(0);
+  transition: opacity 1.5s ease-out, transform 1.6s ease-in;
+}
+
+#matrixCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  display: block;
+  transition: opacity 1.5s ease-out;
+}
+/* --- Page Transition Animations --- */
+
+#matrixCanvas.fade-out-fast {
+  opacity: 0;
+}
+
+.moon-bg img.moon-zoom {
+  opacity: 1;
+  transform: translateZ(0) scale(5);
+}
+
+.overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 8;
+  text-align: center;
+  pointer-events: none;
+  width: 92%;
+}
+
+.hidden { display: none; }
+
+#countNumber {
+  color: #f2f0ef;
+  font-family: Consolas, "Courier New", monospace;
+  font-weight: 400;
+  font-size: 96vmin;
+  line-height: 1;
+  text-shadow: 0 0 18px #dfcff3, 0 0 40px #dfcff3;
+}
+
+.wish-group {
+  width: 100%;
+  text-align: center;
+  transition: opacity 0.4s ease;
+}
+#part2 {
+  /* position: relative; Changed from absolute */
+  width: 100%;
+  /* height: 30vmin; /* A height for them to center in */
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */ 
+}
+
+.wish-word {
+  font-family: 'Great Vibes', cursive;
+  color: #dfffe0;
+  opacity: 0;
+  transform: translateY(10px) scale(0.98);
+  text-shadow: 0 0 18px rgba(0,255,0,0.12);
+  pointer-events: none;
+  line-height: 1.2;
+}
+#w1 {
+  font-family: 'Cinzel', serif;
+  font-weight: 700; 
+  font-size: 12vmin;
+  text-shadow: 0 0 18px #dfcff3, 0 0 40px #dfcff3;
+  /* text-shadow: 0 0 18px #F2F0EF, 0 0 40px #F2F0EF;  */
+}
+#w2 { 
+  font-family: 'Cinzel', serif;
+  font-weight: 700; 
+  font-size: 12vmin;
+  text-shadow: 0 0 18px #dfcff3, 0 0 40px #dfcff3;
+  /* text-shadow: 0 0 18px #F2F0EF, 0 0 40px #F2F0EF; */
+ } /* <-- CHANGE 1: Increased from 8vmin */
+
+
+.wish-word-hb { /* HAPPY BIRTHDAY */
+  /* position: absolute; Stacks it in the center */
+  font-family: 'Cinzel', serif;
+  color: #F2F0EF;
+  font-size: 14vmin; /* Starts big */
+  line-height: 1;
+  text-shadow: 0 0 18px rgba(0,255,0,0.12);
+  opacity: 0;
+  transform: translateY(10px) scale(0.98);
+  text-shadow: 0 0 18px #dfcff3, 0 0 40px #dfcff3;
+  /* text-shadow: 0 0 18px #F2F0EF, 0 0 40px #F2F0EF; */
+  /* transition: all 0.6s cubic-bezier(.2,.9,.3,1); Animation for shrink */
+}
+
+.wish-word-yumie { /* Yumie */
+  /* position: absolute; Stacks it in the center */
+  font-family: 'Great Vibes', cursive;
+  color: #F2F0EF;
+  font-size: 28vmin;
+  text-shadow: 0 0 18px rgba(0,255,0,0.12);
+  opacity: 0;
+  transform: translateY(10px) scale(0.98);
+  text-shadow: 0 0 18px #dfcff3, 0 0 40px #dfcff3;
+}
+
+/* This class is added by JS to animate */
+.wish-word-hb.shrink-up {
+  transform: translateY(-24vmin) scale(0.6); /* <-- CHANGE 2: Increased from -15vmin */
+  /* opacity: 0.7; */
+}
+
+
+.wish-word.pop,
+.wish-word-hb.pop,
+.wish-word-yumie.pop {
+  animation: wishPop 450ms cubic-bezier(.2,.9,.3,1) forwards;
+}
+
+@keyframes wishPop {
+  0% { opacity: 0; transform: translateY(22px) scale(0.92); filter: blur(0.6px); }
+  60% { opacity: 1; transform: translateY(-8px) scale(1.04); filter: blur(0); }
+  100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+
+.fade-in { animation: fadeIn .45s ease forwards; }
+.fade-out { animation: fadeOut .42s ease forwards; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translate(-50%,-48%) scale(0.98); }
+  to   { opacity: 1; transform: translate(-50%,-50%) scale(1); }
+}
+@keyframes fadeOut {
+  from { opacity: 1; transform: translate(-50%,-50%) scale(1); }
+  to   { opacity: 0; transform: translate(-50%,-52%) scale(0.98); }
+}
+
+@media (min-width:600px) {
+  #countNumber { font-size: 96vmin; }
+  
+  #w1 { font-size: 10vmin; }
+  #w2 { font-size: 8vmin; } /* <-- CHANGE 1: Increased from 6vmin */
+  
+  .wish-word-hb { font-size: 10vmin; }
+  .wish-word-yumie { font-size: 28vmin; }
+  
+  .wish-word-hb.shrink-up {
+     transform: translateY(-24vmin) scale(0.6); /* <-- CHANGE 2: Increased from -10vmin */
+  }
+}

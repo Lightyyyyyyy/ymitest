@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Happy 19th, Yumie</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+    <div class="moon-bg" aria-hidden="true">
+      <img src="moon.png" alt="moon" />
+    </div>
+
+    <!-- <img src="moon.png" alt="TEST" style="width:200px; z-index: 1000; position: absolute; top: 10px; left: 10px;"> -->
+
+    <canvas id="matrixCanvas"></canvas>
+
+    <div id="countdown" class="overlay hidden" aria-hidden="true">
+      <div id="countNumber">3</div>
+    </div>
+
+    <div id="finalWords" class="overlay hidden" aria-hidden="true">
+      
+      <div id="part1" class="wish-group">
+        <div class="wish-word" id="w1">MANY MANY</div>
+        <div class="wish-word" id="w2">HAPPY RETURNS OF THE DAY</div>
+      </div>
+
+      <div id="part2" class="wish-group hidden">
+        <div class="wish-word-hb" id="w3">HAPPY BIRTHDAY</div>
+        <div class="wish-word-yumie" id="w4">Yumie</div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

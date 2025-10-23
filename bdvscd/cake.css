@@ -1,0 +1,94 @@
+body {
+    background-color: #f2f0ef; 
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+
+.cake-wrapper {
+    position: relative; 
+    display: inline-block; 
+    cursor: pointer; 
+    /* The use of inline-block here helps maintain the size based on the image */
+}
+
+.kuromi-cake-image {
+    max-width: 600px; 
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* --- FLAME IMAGE STYLES (Retained) --- */
+.flame-image {
+    position: absolute;
+    width: 45px; 
+    height: auto;
+    pointer-events: none;
+    z-index: 10; 
+    opacity: 0; 
+    transition: opacity 0.3s ease-out;
+    filter: drop-shadow(0 0 8px rgba(255, 165, 0, 0.8)) drop-shadow(0 0 2px orange);
+    animation: flicker 1s infinite alternate ease-in-out;
+}
+
+.flame-image.visible {
+    opacity: 1;
+}
+
+.flame-image.blown-out {
+    /* Use 'visibility: hidden;' for a final, zero-impact hiding, 
+       but 'opacity: 0 !important' is usually enough to stop visual rendering */
+    opacity: 0 !important; 
+    animation: none; 
+}
+
+/* --- Precise Flame Positioning on Ear Tips --- */
+.left-flame {
+    top: 5.5%; 
+    left: 22.98%; 
+    transform: translate(-50%, -50%) rotate(5deg); 
+}
+
+.right-flame {
+    top: 5.4%;
+    right: 15.9%;
+    transform: translate(50%, -50%) rotate(-5deg); 
+}
+
+@keyframes flicker {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        transform: translate(-50%, -48%) scale(1.02); 
+        opacity: 0.95;
+    }
+}
+
+/* --- INSTRUCTION TEXT STYLES --- */
+.instruction-text {
+    color: #8a2be2; 
+    font-size: 2em;
+    margin-top: 30px;
+    opacity: 0; 
+    transform: translateY(20px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.instruction-text.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- Page Transition --- */
+.cake-wrapper.fade-out {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
